@@ -1,0 +1,26 @@
+# TODO: Create an XPostgreSQLInstance resource
+#
+# This is the cluster-scoped composite resource a developer would create to request a database stack.
+#
+# Requirements:
+#   - Create a Secret that stores the database user password
+#   - Use the composite kind defined in your XRD: XPostgreSQLInstance
+#   - Do not set a namespace on the XPostgreSQLInstance itself
+#   - Parameters:
+#       * region: europe-west1
+#       * tier: db-f1-micro
+#       * databaseVersion: an initial PostgreSQL version
+#       * databaseName: the logical database to create
+#       * userName: the application user to create
+#       * userPassword: the password for that user, or a reference to where it is stored
+#       * userPasswordSecretRef.namespace: the namespace that holds the password Secret
+#   - Ask Crossplane to write aggregated connection details to a Secret named: my-db-conn
+#     in namespace: default
+#   - The shape of this resource should allow changing databaseVersion later to test an upgrade
+#
+# Tips:
+#   - The password should not be hardcoded directly in the composite resource spec
+#   - Reference the Secret through userPasswordSecretRef
+#   - Set spec.writeConnectionSecretToRef so the function can compose the final Secret
+#
+# Write your resource below:

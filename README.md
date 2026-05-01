@@ -2,15 +2,18 @@
 
 ## Goal
 
-Deploy a **Cloud SQL-like PostgreSQL** instance, database, and user using
-**Crossplane**, running on a local **k3s** cluster on your laptop.
+Deploy a PostgreSQL instance, database, and user with **Crossplane**.
+You can do the lab against real **GCP Cloud SQL** or against **MiniSky** on a local **k3s** cluster.
 
 You will:
 - Set up a local Kubernetes cluster with k3s (or k3d)
 - Install Crossplane and configure a provider backend
 - Design a Crossplane Composition to abstract a Cloud SQL database stack
-- Provision the database stack by applying a simple Kubernetes Claim
+- Provision the database stack by applying a composite resource through Crossplane
 - Make the PostgreSQL major version configurable so it can be upgraded by changing desired state
+
+This branch targets Crossplane XRD `apiextensions.crossplane.io/v2`.
+The lab uses a direct `XPostgreSQLInstance` resource as the developer-facing API.
 
 ## Supported solution paths
 
@@ -31,7 +34,7 @@ Use [MiniSky](https://github.com/qamarudeenm/minisky), a local GCP emulator, to 
 - This path is intended for free local usage.
 - It still requires Docker to be installed and running.
 - On macOS, use the repo's custom install script instead of relying on the upstream one-step installer.
-- For this lab, treat PostgreSQL major-version upgrade verification as a real-GCP-only check; MiniSky is suitable for create/list/delete validation but does not reliably emulate instance version upgrades.
+- For this lab, treat PostgreSQL major-version upgrade verification as a real-GCP-only check. MiniSky is fine for create, list, and delete validation, but it does not reliably emulate instance version upgrades.
 
 ## Rules
 
@@ -42,18 +45,18 @@ Use [MiniSky](https://github.com/qamarudeenm/minisky), a local GCP emulator, to 
 ## Deliverable
 
 A working `kubectl get managed` showing your Cloud SQL resources as `READY=True`,
-and a short explanation (written in `NOTES.md`) of what each component does.
+plus a short explanation in `NOTES.md` of what each component does.
 
 ## Repo layout
 
-- Shared Crossplane API: `crossplane/xrd`, `crossplane/composition`, `crossplane/claim`, `crossplane/function`
+- Shared Crossplane API: `crossplane/xrd`, `crossplane/composition`, `crossplane/xr`, `crossplane/function`
 - Real GCP provider overlay: `crossplane/provider/gcp`
 - MiniSky provider overlay: `crossplane/provider/minisky`
 
 ## Where to start
 
 Read `docs/01-setup-k3s.md` and follow the steps in order.
-When you reach Step 3, choose either the real GCP path or the MiniSky path.
+When you reach Step 3, choose either the real GCP path or the MiniSky path and keep that choice for the rest of the lab.
 
 ## Useful links
 

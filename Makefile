@@ -1,5 +1,5 @@
 Makefile
-.PHONY: check apply-provider apply-xrd apply-composition apply-claim clean
+.PHONY: check apply-provider apply-xrd apply-composition apply-xr clean
 
 check:
 	@./scripts/check.sh
@@ -14,8 +14,8 @@ apply-xrd:
 apply-composition:
 	kubectl apply -f crossplane/composition/composition.yaml
 
-apply-claim:
-	kubectl apply -f crossplane/claim/claim.yaml
+apply-xr:
+	kubectl apply -f crossplane/xr/xr.yaml
 
 clean:
-	kubectl delete -f crossplane/claim/claim.yaml --ignore-not-found
+	kubectl delete -f crossplane/xr/xr.yaml --ignore-not-found

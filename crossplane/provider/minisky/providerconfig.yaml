@@ -1,19 +1,12 @@
-# TODO: Configure the provider for the MiniSky backend
-#
-# Documentation: https://marketplace.upbound.io/providers/upbound/provider-gcp-sql
-#
-# Requirements:
-#   - Use kind: ProviderConfig
-#   - Use the correct apiVersion for the installed GCP provider
-#   - Keep projectID as: local-dev-project
-#   - Use credentials.source: AccessToken
-#   - Reference the Kubernetes secret created by the MiniSky setup script
-#     namespace: crossplane-system
-#     name: gcp-credentials
-#     key: creds
-#
-# Tips:
-#   - This file is different from the real GCP path
-#   - MiniSky uses an access token secret, not a service account JSON key
-#
-# Write your ProviderConfig below:
+apiVersion: gcp.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  projectID: local-dev-project
+  credentials:
+    source: AccessToken
+    secretRef:
+      namespace: crossplane-system
+      name: gcp-credentials
+      key: creds

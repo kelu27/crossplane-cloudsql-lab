@@ -1,15 +1,20 @@
-# TODO: Configure the provider runtime for MiniSky
-#
-# Documentation: https://docs.crossplane.io/latest/packages/providers/#runtime-configuration
-#
-# Requirements:
-#   - Use kind: DeploymentRuntimeConfig
-#   - API version: pkg.crossplane.io/v1beta1
-#   - Configure the provider runtime container named: package-runtime
-#   - Set GOOGLE_SQL_CUSTOM_ENDPOINT to the in-cluster MiniSky SQL proxy service
-#
-# Tips:
-#   - This file is MiniSky-specific and is not needed on the real GCP path
-#   - The endpoint should target the in-cluster proxy, not host.k3d.internal directly
-#
-# Write your DeploymentRuntimeConfig below:
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: provider-gcp-sql-minisky
+spec:
+  deploymentTemplate:
+    spec:
+      selector:
+        matchLabels:
+          runtime-config: provider-gcp-sql-minisky
+      template:
+        metadata:
+          labels:
+            runtime-config: provider-gcp-sql-minisky
+        spec:
+          containers:
+            - name: package-runtime
+              env:
+                - name: GOOGLE_SQL_CUSTOM_ENDPOINT
+                  value: http://minisky-sql-proxy.crossplane-system.svc.cluster.local:8080/

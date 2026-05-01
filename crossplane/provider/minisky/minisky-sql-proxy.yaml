@@ -1,19 +1,70 @@
-# TODO: Create the MiniSky Cloud SQL proxy resources
-#
-# Why this exists:
-# MiniSky expects Cloud SQL requests to arrive with Host: sqladmin.googleapis.com.
-# Requests coming directly from the cluster do not have that host, so they need
-# to pass through a small in-cluster proxy first.
-#
-# Requirements:
-#   - Create a ConfigMap, Deployment, and Service
-#   - Namespace: crossplane-system
-#   - Proxy requests to MiniSky on host.k3d.internal:8080
-#   - Force the upstream Host header to: sqladmin.googleapis.com
-#   - Expose the proxy service on port 8080 for the provider runtime config
-#
-# Tips:
-#   - A small nginx proxy is enough for this lab
-#   - The Service name should match the endpoint used in runtimeconfig.yaml
-#
-# Write your proxy resources below:
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minisky-sql-proxy
+  namespace: crossplane-system
+data:
+  nginx.conf: |
+    events {}
+
+    http {
+      server {
+        listen 8080;
+
+        location / {
+          proxy_pass http://host.k3d.internal:8080;
+          proxy_http_version 1.1;
+          proxy_set_header Host sqladmin.googleapis.com;
+          proxy_set_header Connection "";
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minisky-sql-proxy
+  namespace: crossplane-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minisky-sql-proxy
+  template:
+    metadata:
+      labels:
+        app: minisky-sql-proxy
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.29.8-alpine
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: config
+          configMap:
+            name: minisky-sql-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minisky-sql-proxy
+  namespace: crossplane-system
+spec:
+  selector:
+    app: minisky-sql-proxy
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
