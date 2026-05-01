@@ -10,7 +10,7 @@ Install k3s directly on your machine:
 ## Option B — k3d (recommended if you use Docker)
 
 k3d runs k3s inside Docker containers, which is easier to reset and manage.
-> https://k3d.sigs.k8s.io
+> https://k3d.io
 
 ## What you need to verify before moving on
 
