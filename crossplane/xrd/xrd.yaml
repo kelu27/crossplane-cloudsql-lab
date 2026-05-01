@@ -1,0 +1,18 @@
+# TODO: Define a CompositeResourceDefinition (XRD)
+#
+# Documentation: https://docs.crossplane.io/latest/concepts/composite-resource-definitions/
+#
+# Requirements:
+#   - group: db.example.org
+#   - Composite kind: XPostgreSQLInstance
+#   - Claim kind: PostgreSQLInstance
+#   - Version: v1alpha1
+#   - The spec must expose a `parameters` object containing:
+#       * region (string, required)
+#       * tier (string, optional — default: "db-f1-micro")
+#       * databaseVersion (string, required or defaulted so upgrades are declarative)
+#       * databaseName (string, required or defaulted)
+#       * userName (string, required or defaulted)
+#       * a way to provide the database user password
+
+# Write your XRD below:

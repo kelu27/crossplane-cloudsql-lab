@@ -1,0 +1,18 @@
+# TODO: Create a PostgreSQLInstance claim
+#
+# This is the resource a developer would create to request a database stack.
+#
+# Requirements:
+#   - Use the claim kind defined in your XRD: PostgreSQLInstance
+#   - Namespace: default
+#   - Parameters:
+#       * region: europe-west1
+#       * tier: db-f1-micro
+#       * databaseVersion: an initial PostgreSQL version
+#       * databaseName: the logical database to create
+#       * userName: the application user to create
+#       * userPassword: the password for that user, or a reference to where it is stored
+#   - Write connection details to a secret named: my-db-conn
+#   - The shape of this claim should allow changing databaseVersion later to test an upgrade
+
+# Write your Claim below:
