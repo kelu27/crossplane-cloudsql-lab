@@ -2,7 +2,7 @@
 
 ## What each component does
 
-## What happens when the claim is deleted
+## What happens when the composite resource is deleted
 
 ## Role of the connection secret
 

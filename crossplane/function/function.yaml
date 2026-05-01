@@ -8,6 +8,7 @@
 #   - API version: pkg.crossplane.io/v1
 #   - Metadata name must match the Composition functionRef: function-patch-and-transform
 #   - Install the patch-and-transform function package
+#   - Use a release that supports v2 XR connection secrets, for example: v0.10.4
 #
 # Tips:
 #   - This cluster uses pipeline-mode Compositions, so the function is required

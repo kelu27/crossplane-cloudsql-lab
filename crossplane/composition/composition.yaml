@@ -8,13 +8,15 @@
 #   - Compose a `Database` managed resource inside that instance
 #   - Compose a `User` managed resource for that instance
 #   - Expose `databaseVersion` through the composite API instead of hardcoding it,
-#     so changing the claim can drive a version upgrade
+#     so changing the composite resource can drive a version upgrade
 #   - deletionProtection: false  <-- important for cleanup!
 #   - Use patches to:
 #       * map spec.parameters.region          -> spec.forProvider.region
 #       * map spec.parameters.tier            -> spec.forProvider.settings[0].tier
 #       * map spec.parameters.databaseVersion -> spec.forProvider.databaseVersion
 #       * map database, user, and password secret fields to the right managed resources
+#       * aggregate connection details into the XR connection secret by using
+#         spec.writeConnectionSecretToRef on the XR plus connectionDetails on composed resources
 #   - Reference the ProviderConfig named: default
 #
 # Tips:
