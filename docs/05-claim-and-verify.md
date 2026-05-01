@@ -39,13 +39,16 @@ Backend-specific note for the version-upgrade check:
 - The emulator currently supports the create/list/delete path well enough for this lab, but it does not reliably implement Cloud SQL instance version updates.
 - On MiniSky, you should still verify that the new desired version appears in the claim and composed resource spec, even if the emulator does not apply the upgrade.
 
-Also verify the instance is visible in the GCP Console:
+If you are using the real GCP path, also verify the instance is visible in the GCP Console:
 > https://console.cloud.google.com/sql
 
 ## Cleanup
 
-When you are done, delete the claim and verify that the Cloud SQL instance
-is also deleted from GCP:
+When you are done, delete the claim and verify that the composed resources are cleaned up.
+
+On the real GCP path, this means verifying that the Cloud SQL instance is also deleted from GCP.
+
+On the MiniSky path, this means verifying that the claim, composite, and composed managed resources disappear from the cluster and emulator-backed state:
 ```bash
 kubectl delete -f crossplane/claim/claim.yaml
 ```

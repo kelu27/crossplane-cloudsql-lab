@@ -70,6 +70,7 @@ Important:
 5. Apply the real GCP provider manifests:
   ```bash
   kubectl apply -f crossplane/provider/gcp/provider.yaml
+  kubectl wait --for=condition=Healthy provider.pkg.crossplane.io/provider-gcp-sql --timeout=300s
   kubectl apply -f crossplane/provider/gcp/providerconfig.yaml
   ```
 
@@ -116,7 +117,7 @@ MiniSky is a local GCP emulator that can be used for free on a laptop.
 5. For the MiniSky path, the Crossplane provider must be configured differently from real GCP:
   - `crossplane/provider/minisky/providerconfig.yaml` should keep `projectID: local-dev-project`
   - `crossplane/provider/minisky/providerconfig.yaml` should use `credentials.source: AccessToken`
-  - `crossplane/provider/providerconfig.yaml` should reference a Kubernetes secret named `gcp-credentials`
+  - `crossplane/provider/minisky/providerconfig.yaml` should reference a Kubernetes secret named `gcp-credentials`
   - apply `crossplane/provider/minisky/provider.yaml`, which adds the MiniSky-only `runtimeConfigRef`
   - deploy the in-cluster Cloud SQL proxy in `crossplane/provider/minisky/minisky-sql-proxy.yaml`
   - the SQL provider deployment must be started with:
@@ -133,6 +134,7 @@ MiniSky is a local GCP emulator that can be used for free on a laptop.
   kubectl apply -f crossplane/provider/minisky/minisky-sql-proxy.yaml
   kubectl apply -f crossplane/provider/minisky/runtimeconfig.yaml
   kubectl apply -f crossplane/provider/minisky/provider.yaml
+  kubectl wait --for=condition=Healthy provider.pkg.crossplane.io/provider-gcp-sql --timeout=300s
   kubectl apply -f crossplane/provider/minisky/providerconfig.yaml
   ```
 
@@ -154,6 +156,8 @@ kubectl get provider
 kubectl get providerconfig
 # The selected backend config should be listed without errors
 ```
+
+If `ProviderConfig` fails on a fresh cluster with `no matches for kind "ProviderConfig"`, the provider CRDs are not installed yet. Wait for `provider-gcp-sql` to become `HEALTHY=True`, then apply the `ProviderConfig` again.
 
 For the MiniSky path, also verify:
 
