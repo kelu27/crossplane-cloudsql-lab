@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: ./scripts/setup-gcp-credentials.sh /path/to/gcp-key.json
+# Usage: ./scripts/gcp/setup-gcp-credentials.sh /path/to/gcp-key.json
 
 set -e
 

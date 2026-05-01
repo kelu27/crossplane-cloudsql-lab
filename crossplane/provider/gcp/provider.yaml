@@ -1,0 +1,16 @@
+# TODO: Install the correct Crossplane provider for GCP Cloud SQL
+#
+# Documentation: https://marketplace.upbound.io/providers
+#
+# Requirements:
+#   - Resource kind: Provider
+#   - API version: pkg.crossplane.io/v1
+#   - Install the Upbound GCP SQL provider package
+#   - Use the right package version for this lab
+#   - Do NOT add MiniSky-specific runtimeConfigRef on the real GCP path
+#
+# Tips:
+#   - The provider package is not named provider-gcp-cloudsql
+#   - Look for the SQL provider under the Upbound GCP family
+#
+# Write your Provider below:

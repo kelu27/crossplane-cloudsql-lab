@@ -31,6 +31,7 @@ Use [MiniSky](https://github.com/qamarudeenm/minisky), a local GCP emulator, to 
 - This path is intended for free local usage.
 - It still requires Docker to be installed and running.
 - On macOS, use the repo's custom install script instead of relying on the upstream one-step installer.
+- For this lab, treat PostgreSQL major-version upgrade verification as a real-GCP-only check; MiniSky is suitable for create/list/delete validation but does not reliably emulate instance version upgrades.
 
 ## Rules
 
@@ -43,6 +44,12 @@ Use [MiniSky](https://github.com/qamarudeenm/minisky), a local GCP emulator, to 
 A working `kubectl get managed` showing your Cloud SQL resources as `READY=True`,
 and a short explanation (written in `NOTES.md`) of what each component does.
 
+## Repo layout
+
+- Shared Crossplane API: `crossplane/xrd`, `crossplane/composition`, `crossplane/claim`, `crossplane/function`
+- Real GCP provider overlay: `crossplane/provider/gcp`
+- MiniSky provider overlay: `crossplane/provider/minisky`
+
 ## Where to start
 
 Read `docs/01-setup-k3s.md` and follow the steps in order.
@@ -51,6 +58,6 @@ When you reach Step 3, choose either the real GCP path or the MiniSky path.
 ## Useful links
 
 - https://docs.crossplane.io
-- https://marketplace.upbound.io/providers/upbound/provider-gcp-cloudsql
+- https://marketplace.upbound.io/providers/upbound/provider-gcp-sql
 - https://cloud.google.com/sql/docs
 - https://github.com/qamarudeenm/minisky

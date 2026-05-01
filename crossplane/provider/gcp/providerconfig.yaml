@@ -1,0 +1,19 @@
+# TODO: Configure the GCP provider with your project credentials
+#
+# Documentation: https://marketplace.upbound.io/providers/upbound/provider-gcp-sql
+#
+# Requirements:
+#   - Use kind: ProviderConfig
+#   - Use the correct apiVersion for the installed GCP provider
+#   - Set your real GCP project ID
+#   - Use credentials.source: Secret
+#   - Reference the Kubernetes secret created by the setup script
+#     namespace: crossplane-system
+#     name: gcp-credentials
+#     key: creds
+#
+# Tips:
+#   - This file is different for the MiniSky path
+#   - The secret should contain the GCP service account JSON key
+#
+# Write your ProviderConfig below:

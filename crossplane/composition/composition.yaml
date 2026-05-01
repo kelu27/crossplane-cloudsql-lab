@@ -1,7 +1,7 @@
 # TODO: Write a Composition for XPostgreSQLInstance
 #
 # Documentation: https://docs.crossplane.io/latest/concepts/compositions/
-# GCP DatabaseInstance reference: https://marketplace.upbound.io/providers/upbound/provider-gcp-cloudsql
+# GCP DatabaseInstance reference: https://marketplace.upbound.io/providers/upbound/provider-gcp-sql
 #
 # Requirements:
 #   - Compose a `DatabaseInstance` managed resource (GCP Cloud SQL)
@@ -11,12 +11,15 @@
 #     so changing the claim can drive a version upgrade
 #   - deletionProtection: false  <-- important for cleanup!
 #   - Use patches to:
-#       * map spec.parameters.region  -> spec.forProvider.region
-#       * map spec.parameters.tier    -> spec.forProvider.settings[0].tier
-#       * map database, user, and version fields to the right managed resources
+#       * map spec.parameters.region          -> spec.forProvider.region
+#       * map spec.parameters.tier            -> spec.forProvider.settings[0].tier
+#       * map spec.parameters.databaseVersion -> spec.forProvider.databaseVersion
+#       * map database, user, and password secret fields to the right managed resources
+#   - Reference the ProviderConfig named: default
 #
 # Tips:
+#   - This cluster expects pipeline mode, not legacy spec.resources mode
+#   - The function name used in functionRef must match crossplane/function/function.yaml
 #   - The patch type you want is: FromCompositeFieldPath
-#   - Don't forget to reference your ProviderConfig
-
+#
 # Write your Composition below:

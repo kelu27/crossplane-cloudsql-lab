@@ -32,6 +32,13 @@ kubectl get secret my-db-conn -o yaml
 # PostgreSQL version updates the managed Cloud SQL instance.
 ```
 
+Backend-specific note for the version-upgrade check:
+
+- On the real GCP path, changing `spec.parameters.databaseVersion` is part of the exercise and should be verified.
+- On the MiniSky path, changing `spec.parameters.databaseVersion` is not a reliable upgrade test.
+- The emulator currently supports the create/list/delete path well enough for this lab, but it does not reliably implement Cloud SQL instance version updates.
+- On MiniSky, you should still verify that the new desired version appears in the claim and composed resource spec, even if the emulator does not apply the upgrade.
+
 Also verify the instance is visible in the GCP Console:
 > https://console.cloud.google.com/sql
 
@@ -48,4 +55,6 @@ kubectl delete -f crossplane/claim/claim.yaml
 - What happens in GCP when you delete a Claim in Kubernetes?
 - What is the role of the connection secret?
 - How does a version change in the claim propagate to the managed Cloud SQL instance?
+- Why is the version-upgrade check different on the MiniSky path?
+- If you are using MiniSky, prove that the upgrade limitation is caused by the emulator and not by your Crossplane manifests. What evidence shows that your changed `databaseVersion` reached the claim and composed managed resource correctly?
 - What would you change to make this production-ready?

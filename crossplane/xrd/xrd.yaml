@@ -14,5 +14,11 @@
 #       * databaseName (string, required or defaulted)
 #       * userName (string, required or defaulted)
 #       * a way to provide the database user password
-
+#   - The schema must allow claims to set writeConnectionSecretToRef.name
+#
+# Tips:
+#   - The XRD schema lives under spec.versions[].schema.openAPIV3Schema
+#   - Claim names belong in spec.claimNames
+#   - Use defaults where that makes the student claim easier to write
+#
 # Write your XRD below:

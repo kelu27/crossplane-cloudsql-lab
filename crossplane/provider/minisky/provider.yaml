@@ -1,0 +1,15 @@
+# TODO: Install the provider for the MiniSky backend
+#
+# Documentation: https://marketplace.upbound.io/providers/upbound/provider-gcp-sql
+#
+# Requirements:
+#   - Install the same Upbound GCP SQL provider package as the real GCP path
+#   - Use kind: Provider in apiVersion: pkg.crossplane.io/v1
+#   - Keep the provider name stable as: provider-gcp-sql
+#   - Add a runtimeConfigRef so the provider uses the MiniSky endpoint override
+#
+# Tips:
+#   - The only provider manifest difference vs real GCP is the MiniSky runtimeConfigRef
+#   - The runtimeConfigRef should point at provider-gcp-sql-minisky
+#
+# Write your Provider below:

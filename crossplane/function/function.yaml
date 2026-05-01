@@ -1,0 +1,16 @@
+# TODO: Install the Crossplane composition function used by this lab
+#
+# Documentation: https://docs.crossplane.io/latest/concepts/compositions/#use-a-pipeline-of-functions-in-a-composition
+# Function package reference: https://marketplace.upbound.io/functions/crossplane-contrib/function-patch-and-transform
+#
+# Requirements:
+#   - Use kind: Function
+#   - API version: pkg.crossplane.io/v1
+#   - Metadata name must match the Composition functionRef: function-patch-and-transform
+#   - Install the patch-and-transform function package
+#
+# Tips:
+#   - This cluster uses pipeline-mode Compositions, so the function is required
+#   - The package should come from xpkg.crossplane.io/crossplane-contrib
+#
+# Write your Function below:

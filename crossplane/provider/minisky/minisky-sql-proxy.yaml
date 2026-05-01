@@ -1,0 +1,19 @@
+# TODO: Create the MiniSky Cloud SQL proxy resources
+#
+# Why this exists:
+# MiniSky expects Cloud SQL requests to arrive with Host: sqladmin.googleapis.com.
+# Requests coming directly from the cluster do not have that host, so they need
+# to pass through a small in-cluster proxy first.
+#
+# Requirements:
+#   - Create a ConfigMap, Deployment, and Service
+#   - Namespace: crossplane-system
+#   - Proxy requests to MiniSky on host.k3d.internal:8080
+#   - Force the upstream Host header to: sqladmin.googleapis.com
+#   - Expose the proxy service on port 8080 for the provider runtime config
+#
+# Tips:
+#   - A small nginx proxy is enough for this lab
+#   - The Service name should match the endpoint used in runtimeconfig.yaml
+#
+# Write your proxy resources below:

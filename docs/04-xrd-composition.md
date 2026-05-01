@@ -13,6 +13,15 @@ Read: https://docs.crossplane.io/latest/concepts/compositions/
 
 ## What you need to do
 
+Each starter manifest begins with a TODO block at the top. Use it as a checklist for the required items, documentation links, and hints.
+
+### 4.0 — Fill in `crossplane/function/function.yaml`
+
+Install the composition function used by this cluster:
+- Use kind `Function`
+- Name it `function-patch-and-transform`
+- Install the patch-and-transform function package
+
 ### 4.1 — Fill in `crossplane/xrd/xrd.yaml`
 
 Define an XRD that:
