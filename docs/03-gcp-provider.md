@@ -35,6 +35,10 @@ Use this path if you want to provision a real Cloud SQL instance in Google Cloud
      ```bash
      export PROJECT_ID="your-gcp-project-id"
      ```
+   - Enable the Cloud SQL Admin API on that project:
+     ```bash
+     gcloud services enable sqladmin.googleapis.com --project "$PROJECT_ID"
+     ```
    - Create a service account for Crossplane:
      ```bash
      gcloud iam service-accounts create crossplane-cloudsql \
